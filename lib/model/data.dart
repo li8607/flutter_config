@@ -15,7 +15,7 @@ class Data {
     List<ColumnInfo> list = List();
     ColumnInfo columnInfo =
         new ColumnInfo("Container", "一个拥有绘制、定位、调整大小的 widget。");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_container";
     list.add(columnInfo);
 
     columnInfo =

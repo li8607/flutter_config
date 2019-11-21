@@ -3,6 +3,7 @@ import 'package:flutter_widget/model/data.dart';
 
 import 'model/column_info.dart';
 import 'widgets/basics.dart';
+import 'widgets/container.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
     return {
       "basics": (context) => BasicsWidget(),
       "/": (context) => MyHomePage(title: 'Flutter Demo Home Page'),
+      "basics_container": (context) => ContainerDemo()
     };
   }
 }
@@ -142,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisCount: 2,
               crossAxisSpacing: 20.0,
               mainAxisSpacing: 20.0,
-              childAspectRatio: 1.0),
+              childAspectRatio: 0.5),
           itemBuilder: (BuildContext context, int index) {
             return _child(list[index]);
           },

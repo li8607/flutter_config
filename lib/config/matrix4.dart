@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget/config/width.dart';
 
 class Matrix4Widget extends StatefulWidget {
-  ValueChanged<Matrix4> onChange;
-  Matrix4Widget({Key key, this.onChange}) : super(key: key);
+  final ValueChanged<Matrix4> onChange;
+  final Matrix4 matrix4;
+  Matrix4Widget({Key key, this.matrix4, this.onChange}) : super(key: key);
 
   @override
   _Matrix4WidgetState createState() => _Matrix4WidgetState();
@@ -10,20 +12,19 @@ class Matrix4Widget extends StatefulWidget {
 
 class _Matrix4WidgetState extends State<Matrix4Widget> {
   Widget _rotaionXYZ() {
-    return Container(
-        child: TextField(
-      onChanged: (value) {
+    return DoubleWidget(
+      title: "_groupValue",
+      hit: "请输入值",
+      onChange: (value) {
         if (_groupValue == 'rotationX') {
-          widget.onChange(Matrix4.rotationX(double.parse(value)));
+          widget.onChange(Matrix4.rotationX(value));
         } else if (_groupValue == 'rotation') {
-          widget.onChange(Matrix4.rotationY(double.parse(value)));
+          widget.onChange(Matrix4.rotationY(value));
         } else {
-          widget.onChange(Matrix4.rotationZ(double.parse(value)));
+          widget.onChange(Matrix4.rotationZ(value));
         }
       },
-      decoration: InputDecoration(labelText: _groupValue),
-      keyboardType: TextInputType.number,
-    ));
+    );
   }
 
   String _groupValue = '';

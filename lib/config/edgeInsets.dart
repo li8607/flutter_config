@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget/config/width.dart';
 
 class EdgeInsetsWidget extends StatefulWidget {
   ValueChanged<EdgeInsets> onChange;
-
-  EdgeInsetsWidget({Key key, this.onChange}) : super(key: key);
+  EdgeInsets edgeInsets;
+  EdgeInsetsWidget({Key key, this.edgeInsets, this.onChange}) : super(key: key);
 
   @override
   _EdgeInsetsWidgetState createState() => _EdgeInsetsWidgetState();
@@ -12,16 +13,31 @@ class EdgeInsetsWidget extends StatefulWidget {
 class _EdgeInsetsWidgetState extends State<EdgeInsetsWidget> {
   String _groupValue = "all";
   double top, left, bottom, right;
+  double value;
+
+  @override
+  void initState() {
+    if (widget.edgeInsets != null) {
+      top = widget.edgeInsets.top;
+      left = widget.edgeInsets.left;
+      bottom = widget.edgeInsets.bottom;
+      right = widget.edgeInsets.right;
+      if (top == left && top == bottom && top == right) {
+        value = top;
+      }
+    }
+    super.initState();
+  }
 
   Widget _allChild() {
-    return Container(
-        child: TextField(
-      onChanged: (value) {
-        widget.onChange(EdgeInsets.all(double.parse(value)));
+    return DoubleWidget(
+      title: "value",
+      hit: "请输入值",
+      value: value,
+      onChange: (value) {
+        widget.onChange(EdgeInsets.all(value));
       },
-      decoration: InputDecoration(labelText: 'value'),
-      keyboardType: TextInputType.number,
-    ));
+    );
   }
 
   EdgeInsets only() {
@@ -33,38 +49,42 @@ class _EdgeInsetsWidgetState extends State<EdgeInsetsWidget> {
     return Container(
       child: Wrap(
         children: <Widget>[
-          TextField(
-            onChanged: (value) {
-              top = double.parse(value);
+          DoubleWidget(
+            title: "top",
+            hit: "请输入top值",
+            value: value,
+            onChange: (value) {
+              top = value;
               widget.onChange(only());
             },
-            decoration: InputDecoration(labelText: 'top'),
-            keyboardType: TextInputType.number,
           ),
-          TextField(
-            onChanged: (value) {
-              left = double.parse(value);
+          DoubleWidget(
+            title: "left",
+            hit: "请输入left值",
+            value: value,
+            onChange: (value) {
+              left = value;
               widget.onChange(only());
             },
-            decoration: InputDecoration(labelText: 'left'),
-            keyboardType: TextInputType.number,
           ),
-          TextField(
-            onChanged: (value) {
-              bottom = double.parse(value);
+          DoubleWidget(
+            title: "bottom",
+            hit: "请输入bottom值",
+            value: value,
+            onChange: (value) {
+              bottom = value;
               widget.onChange(only());
             },
-            decoration: InputDecoration(labelText: 'bottom'),
-            keyboardType: TextInputType.number,
           ),
-          TextField(
-            onChanged: (value) {
-              right = double.parse(value);
+          DoubleWidget(
+            title: "right",
+            hit: "请输入right值",
+            value: value,
+            onChange: (value) {
+              right = value;
               widget.onChange(only());
             },
-            decoration: InputDecoration(labelText: 'right'),
-            keyboardType: TextInputType.number,
-          )
+          ),
         ],
       ),
     );

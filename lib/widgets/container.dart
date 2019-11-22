@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget/config/alignment.dart';
 import 'package:flutter_widget/config/color.dart';
 import 'package:flutter_widget/config/constraints.dart';
+import 'package:flutter_widget/config/decoration.dart';
 import 'package:flutter_widget/config/edgeInsets.dart';
 import 'package:flutter_widget/config/matrix4.dart';
 import 'package:flutter_widget/config/width.dart';
@@ -72,64 +73,73 @@ class _ContainerDemoState extends State<ContainerDemo> {
                 children: <Widget>[
                   _card(DoubleWidget(
                     title: "width",
+                    hit: "请输入宽度",
+                    value: config.width,
                     onChange: (value) {
                       setState(() {
-                        config.width = double.parse(value);
+                        config.width = value;
                       });
                     },
-                  )),
+                  ), title: "width"),
                   _card(DoubleWidget(
                     title: "height",
+                    hit: "请输入高度",
+                    value: config.height,
                     onChange: (value) {
                       setState(() {
-                        config.height = double.parse(value);
+                        config.height = value;
                       });
                     },
-                  )),
+                  ), title: "height"),
                   _card(EdgeInsetsWidget(
                     onChange: (value) {
                       setState(() {
                         config.margin = value;
                       });
                     },
-                  )),
+                  ), title: "margin"),
                   _card(EdgeInsetsWidget(
                     onChange: (value) {
                       setState(() {
                         config.padding = value;
                       });
                     },
-                  )),
+                  ), title: "padding"),
                   _card(ColorWidget(
                     onChange: (value) {
                       setState(() {
                         config.color = value;
                       });
                     },
-                  )),
+                  ), title: "color"),
                   _card(Matrix4Widget(
                     onChange: (value) {
                       setState(() {
                         config.transform = value;
                       });
                     },
-                  )),
+                  ), title: "transform"),
                   _card(AlignmentWidget(
                     onChange: (value) {
                       setState(() {
                         config.alignment = value;
                       });
                     },
-                  )),
+                  ), title: "alignment"),
                   _card(ConstraintsWidget(
                     onChange: (value) {
                       setState(() {
                         config.constraints = value;
                       });
                     },
-                  )),
-                  _constraints(),
-                  _decoration()
+                  ), title: "constraints"),
+                  _card(DecorationWidget(
+                    onChange: (value) {
+                      setState(() {
+                        config.decoration = value;
+                      });
+                    },
+                  ), title: 'decoration')
                 ],
               ),
             )
@@ -139,7 +149,21 @@ class _ContainerDemoState extends State<ContainerDemo> {
     );
   }
 
-  Widget _card(Widget child) {
+  Widget _card(Widget child, {String title}) {
+    List<Widget> list = List();
+
+    Widget widget;
+    if (title != null) {
+      widget = Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+        alignment: Alignment.center,
+        child:
+            Text(title, style: TextStyle(fontSize: 16.0, color: Colors.white)),
+      );
+      list.add(widget);
+    }
+
+    list.add(child);
     return Card(
         color: Colors.deepPurpleAccent,
         elevation: 10.0,
@@ -147,7 +171,9 @@ class _ContainerDemoState extends State<ContainerDemo> {
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         clipBehavior: Clip.antiAlias,
         semanticContainer: false,
-        child: child);
+        child: Column(
+          children: list,
+        ));
   }
 
   Widget _width() {

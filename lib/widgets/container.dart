@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget/config/alignment.dart';
+import 'package:flutter_widget/config/color.dart';
+import 'package:flutter_widget/config/constraints.dart';
+import 'package:flutter_widget/config/edgeInsets.dart';
+import 'package:flutter_widget/config/matrix4.dart';
+import 'package:flutter_widget/config/width.dart';
 import 'package:flutter_widget/model/column_info.dart';
 import 'package:flutter_widget/widgets/number.dart';
 
@@ -64,13 +70,64 @@ class _ContainerDemoState extends State<ContainerDemo> {
             Expanded(
               child: ListView(
                 children: <Widget>[
-                  _width(),
-                  _height(),
-                  _margin(),
-                  _padding(),
-                  _color(),
-                  _transform(),
-                  _alignment(),
+                  _card(DoubleWidget(
+                    title: "width",
+                    onChange: (value) {
+                      setState(() {
+                        config.width = double.parse(value);
+                      });
+                    },
+                  )),
+                  _card(DoubleWidget(
+                    title: "height",
+                    onChange: (value) {
+                      setState(() {
+                        config.height = double.parse(value);
+                      });
+                    },
+                  )),
+                  _card(EdgeInsetsWidget(
+                    onChange: (value) {
+                      setState(() {
+                        config.margin = value;
+                      });
+                    },
+                  )),
+                  _card(EdgeInsetsWidget(
+                    onChange: (value) {
+                      setState(() {
+                        config.padding = value;
+                      });
+                    },
+                  )),
+                  _card(ColorWidget(
+                    onChange: (value) {
+                      setState(() {
+                        config.color = value;
+                      });
+                    },
+                  )),
+                  _card(Matrix4Widget(
+                    onChange: (value) {
+                      setState(() {
+                        config.transform = value;
+                      });
+                    },
+                  )),
+                  _card(AlignmentWidget(
+                    onChange: (value) {
+                      setState(() {
+                        config.alignment = value;
+                      });
+                    },
+                  )),
+                  _card(ConstraintsWidget(
+                    onChange: (value) {
+                      setState(() {
+                        config.constraints = value;
+                      });
+                    },
+                  )),
                   _constraints(),
                   _decoration()
                 ],
@@ -80,6 +137,17 @@ class _ContainerDemoState extends State<ContainerDemo> {
         ),
       ),
     );
+  }
+
+  Widget _card(Widget child) {
+    return Card(
+        color: Colors.deepPurpleAccent,
+        elevation: 10.0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        clipBehavior: Clip.antiAlias,
+        semanticContainer: false,
+        child: child);
   }
 
   Widget _width() {
@@ -339,18 +407,6 @@ class _ContainerDemoState extends State<ContainerDemo> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _card(Widget child) {
-    return Card(
-      color: Colors.blueAccent,
-      elevation: 20.0,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20.0))),
-      clipBehavior: Clip.antiAlias,
-      semanticContainer: false,
-      child: child,
     );
   }
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget/config/width.dart';
 
 class EdgeInsetsWidget extends StatefulWidget {
-  ValueChanged<EdgeInsets> onChange;
-  EdgeInsets edgeInsets;
+  final ValueChanged<EdgeInsets> onChange;
+  final EdgeInsets edgeInsets;
   EdgeInsetsWidget({Key key, this.edgeInsets, this.onChange}) : super(key: key);
 
   @override
@@ -11,9 +11,10 @@ class EdgeInsetsWidget extends StatefulWidget {
 }
 
 class _EdgeInsetsWidgetState extends State<EdgeInsetsWidget> {
-  String _groupValue = "all";
+  String _groupValue = "";
   double top, left, bottom, right;
   double value;
+  Map<String, Object> list = {};
 
   @override
   void initState() {
@@ -35,6 +36,7 @@ class _EdgeInsetsWidgetState extends State<EdgeInsetsWidget> {
       hit: "请输入值",
       value: value,
       onChange: (value) {
+        print("$value");
         widget.onChange(EdgeInsets.all(value));
       },
     );
@@ -110,9 +112,10 @@ class _EdgeInsetsWidgetState extends State<EdgeInsetsWidget> {
                     value: 'all',
                     title: Text('all'),
                     groupValue: _groupValue,
-                    onChanged: (value) {
+                    onChanged: (value1) {
                       setState(() {
-                        _groupValue = value;
+                        _groupValue = value1;
+                        list = {"value": value ?? 0.0};
                       });
                     },
                   ),
@@ -127,6 +130,12 @@ class _EdgeInsetsWidgetState extends State<EdgeInsetsWidget> {
                     onChanged: (value) {
                       setState(() {
                         _groupValue = value;
+                        list = {
+                          "top": top ?? 0.0,
+                          "left": left ?? 0.0,
+                          "bottom": bottom ?? 0.0,
+                          "right": right ?? 0.0
+                        };
                       });
                     },
                   ),
@@ -134,9 +143,56 @@ class _EdgeInsetsWidgetState extends State<EdgeInsetsWidget> {
               )
             ],
           ),
-          child
+          Wrap(
+            children: list.keys.map<Widget>((key) {
+              return DoubleWidget(
+                title: key,
+                hit: "请输入key值",
+                value: list[key],
+                onChange: (value) {
+                  list[key] = value;
+                  if (_groupValue == 'all') {
+                    widget.onChange(EdgeInsets.all(value));
+                  } else if (_groupValue == "only") {
+                    widget.onChange(EdgeInsets.only(
+                        top: list["top"],
+                        left: list["left"],
+                        bottom: list["bottom"],
+                        right: list["right"]));
+                  }
+                },
+              );
+            }).toList(),
+          )
         ],
       ),
     );
+  }
+
+  Widget _card(Widget child, {String title}) {
+    List<Widget> list = List();
+
+    Widget widget;
+    if (title != null) {
+      widget = Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+        alignment: Alignment.center,
+        child:
+            Text(title, style: TextStyle(fontSize: 16.0, color: Colors.white)),
+      );
+      list.add(widget);
+    }
+
+    list.add(child);
+    return Card(
+        color: Colors.purpleAccent,
+        elevation: 10.0,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        clipBehavior: Clip.antiAlias,
+        semanticContainer: false,
+        child: Column(
+          children: list,
+        ));
   }
 }

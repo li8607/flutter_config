@@ -1,16 +1,26 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_widget/config/width.dart';
 
 class ConstraintsWidget extends StatefulWidget {
   final ValueChanged<BoxConstraints> onChange;
-  ConstraintsWidget({Key key, this.onChange}) : super(key: key);
+  final BoxConstraints constraints;
+  ConstraintsWidget({Key key, this.constraints, this.onChange})
+      : super(key: key);
   @override
   _ConstraintsWidgetState createState() => _ConstraintsWidgetState();
 }
 
 class _ConstraintsWidgetState extends State<ConstraintsWidget> {
   double width, height;
+
+  @override
+  void initState() {
+    width = 200.0;
+    height = 200.0;
+    super.initState();
+  }
 
   BoxConstraints createBoxConstraints() {
     return BoxConstraints.expand(width: width ?? 0, height: height ?? 0);
@@ -19,24 +29,24 @@ class _ConstraintsWidgetState extends State<ConstraintsWidget> {
   Widget expand() {
     return Column(
       children: <Widget>[
-        Container(
-            child: TextField(
-          onChanged: (value) {
-            width = double.parse(value);
+        DoubleWidget(
+          title: 'width',
+          hit: '请输入width',
+          value: width,
+          onChange: (value) {
+            width = value;
             widget.onChange(createBoxConstraints());
           },
-          decoration: InputDecoration(labelText: 'width'),
-          keyboardType: TextInputType.number,
-        )),
-        Container(
-            child: TextField(
-          onChanged: (value) {
-            height = double.parse(value);
+        ),
+        DoubleWidget(
+          title: 'height',
+          hit: '请输入height',
+          value: height,
+          onChange: (value) {
+            height = value;
             widget.onChange(createBoxConstraints());
           },
-          decoration: InputDecoration(labelText: 'height'),
-          keyboardType: TextInputType.number,
-        ))
+        ),
       ],
     );
   }
@@ -61,6 +71,7 @@ class _ConstraintsWidgetState extends State<ConstraintsWidget> {
             onChanged: (value) {
               setState(() {
                 _groupValue = value;
+                widget.onChange(createBoxConstraints());
               });
             },
           ),

@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 
 class AlignmentWidget extends StatefulWidget {
   final ValueChanged<Alignment> onChange;
-  AlignmentWidget({Key key, this.onChange}) : super(key: key);
+  final Alignment alignment;
+  AlignmentWidget({Key key, this.alignment, this.onChange}) : super(key: key);
 
   @override
   _AlignmentWidgetState createState() => _AlignmentWidgetState();
 }
 
 class _AlignmentWidgetState extends State<AlignmentWidget> {
-  String _groupValue = '';
+  Alignment _groupValue;
+
+  @override
+  void initState() {
+    _groupValue = widget.alignment;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,7 @@ class _AlignmentWidgetState extends State<AlignmentWidget> {
       child: Wrap(
         children: <Widget>[
           RadioListTile(
-            value: 'bottomCenter',
+            value: Alignment.bottomCenter,
             title: Text('bottomCenter'),
             groupValue: _groupValue,
             onChanged: (value) {
@@ -26,7 +33,7 @@ class _AlignmentWidgetState extends State<AlignmentWidget> {
             },
           ),
           RadioListTile(
-            value: 'bottomLeft',
+            value: Alignment.bottomLeft,
             title: Text('bottomLeft'),
             groupValue: _groupValue,
             onChanged: (value) {
@@ -35,7 +42,7 @@ class _AlignmentWidgetState extends State<AlignmentWidget> {
             },
           ),
           RadioListTile(
-            value: 'bottomRight',
+            value: Alignment.bottomRight,
             title: Text('bottomRight'),
             groupValue: _groupValue,
             onChanged: (value) {
@@ -44,7 +51,7 @@ class _AlignmentWidgetState extends State<AlignmentWidget> {
             },
           ),
           RadioListTile(
-            value: 'topCenter',
+            value: Alignment.topCenter,
             title: Text('topCenter'),
             groupValue: _groupValue,
             onChanged: (value) {
@@ -53,7 +60,7 @@ class _AlignmentWidgetState extends State<AlignmentWidget> {
             },
           ),
           RadioListTile(
-            value: 'topRight',
+            value: Alignment.topRight,
             title: Text('topRight'),
             groupValue: _groupValue,
             onChanged: (value) {
@@ -62,7 +69,7 @@ class _AlignmentWidgetState extends State<AlignmentWidget> {
             },
           ),
           RadioListTile(
-            value: 'topLeft',
+            value: Alignment.topLeft,
             title: Text('topLeft'),
             groupValue: _groupValue,
             onChanged: (value) {
@@ -71,7 +78,7 @@ class _AlignmentWidgetState extends State<AlignmentWidget> {
             },
           ),
           RadioListTile(
-            value: 'center',
+            value: Alignment.center,
             title: Text('center'),
             groupValue: _groupValue,
             onChanged: (value) {
@@ -80,7 +87,7 @@ class _AlignmentWidgetState extends State<AlignmentWidget> {
             },
           ),
           RadioListTile(
-            value: 'centerRight',
+            value: Alignment.centerRight,
             title: Text('centerRight'),
             groupValue: _groupValue,
             onChanged: (value) {
@@ -89,7 +96,7 @@ class _AlignmentWidgetState extends State<AlignmentWidget> {
             },
           ),
           RadioListTile(
-            value: 'centerLeft',
+            value: Alignment.centerLeft,
             title: Text('centerLeft'),
             groupValue: _groupValue,
             onChanged: (value) {

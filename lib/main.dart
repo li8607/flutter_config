@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget/model/data.dart';
+import 'package:flutter_widget/widgets/appbar.dart';
+import 'package:flutter_widget/widgets/column.dart';
+import 'package:flutter_widget/widgets/flutter_logo.dart';
+import 'package:flutter_widget/widgets/icon.dart';
+import 'package:flutter_widget/widgets/image.dart';
+import 'package:flutter_widget/widgets/placeholder.dart';
+import 'package:flutter_widget/widgets/raised_button.dart';
+import 'package:flutter_widget/widgets/row.dart';
+import 'package:flutter_widget/widgets/scaffold.dart';
+import 'package:flutter_widget/widgets/text.dart';
 
 import 'model/column_info.dart';
 import 'widgets/basics.dart';
@@ -8,7 +18,6 @@ import 'widgets/container.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,7 +25,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: MyHomePage(title: 'Flutter Demo Home Page'),
       routes: _routes(),
     );
   }
@@ -25,22 +33,23 @@ class MyApp extends StatelessWidget {
     return {
       "basics": (context) => BasicsWidget(),
       "/": (context) => MyHomePage(title: 'Flutter Demo Home Page'),
-      "basics_container": (context) => ContainerDemo()
+      "basics_container": (context) => ContainerDemo(),
+      "basics_row": (context) => RowDemo(),
+      "basics_column": (context) => ColumnDemo(),
+      "basics_image": (context) => ImageDemo(),
+      "basics_text": (context) => TextDemo(),
+      "basics_icon": (context) => IconDemo(),
+      "basics_raised": (context) => RaisedButtonDemo(),
+      "basics_scaffold": (context) => ScaffoldDemo(),
+      "basics_appbar": (context) => AppbarDemo(),
+      "basics_flutter_logo": (context) => FlutterLogoDemo(),
+      "basics_placeholder": (context) => PlaceholderDemo(),
     };
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -49,19 +58,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   List<ColumnInfo> list;
 
   @override
@@ -122,21 +118,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: GridView.builder(
           itemCount: list.length,
           padding: EdgeInsets.all(20.0),
@@ -150,11 +136,6 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -169,7 +150,6 @@ class _MyHomePageState extends State<MyHomePage> {
         _click(info);
       },
       child: Container(
-        // constraints: BoxConstraints.expand(height: 200.0),
         padding: EdgeInsets.all(20.0),
         decoration: BoxDecoration(color: Colors.blue[800]),
         child: Column(

@@ -20,53 +20,53 @@ class Data {
 
     columnInfo =
         new ColumnInfo("Row", "在水平方向上排列子widget的列表。");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_row";
     list.add(columnInfo);
 
     columnInfo =
         new ColumnInfo("Column", "在垂直方向上排列子widget的列表。");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_column";
     list.add(columnInfo);
 
     columnInfo =
         new ColumnInfo("Image", "一个显示图片的widget");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_image";
     list.add(columnInfo);
 
     columnInfo =
         new ColumnInfo("Text", "单一格式的文本");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_text";
     list.add(columnInfo);
 
     columnInfo =
         new ColumnInfo("Icon", "A Material Design icon.");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_icon";
     list.add(columnInfo);
 
     columnInfo =
         new ColumnInfo("RaisedButton", "Material Design中的button， 一个凸起的材质矩形按钮");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_raised";
     list.add(columnInfo);
 
 
     columnInfo =
         new ColumnInfo("Scaffold", "Material Design布局结构的基本实现。此类提供了用于显示drawer、snackbar和底部sheet的API。");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_scaffold";
     list.add(columnInfo);
 
     columnInfo =
         new ColumnInfo("Appbar", "一个Material Design应用程序栏，由工具栏和其他可能的widget（如TabBar和FlexibleSpaceBar）组成。");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_appbar";
     list.add(columnInfo);
 
     columnInfo =
         new ColumnInfo("FlutterLogo", "Flutter logo, 以widget形式. 这个widget遵从IconTheme。");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_flutter_logo";
     list.add(columnInfo);
 
      columnInfo =
         new ColumnInfo("Placeholder", "一个绘制了一个盒子的的widget，代表日后有widget将会被添加到该盒子中");
-    columnInfo.routeName = "";
+    columnInfo.routeName = "basics_placeholder";
     list.add(columnInfo);
     return list;
   }

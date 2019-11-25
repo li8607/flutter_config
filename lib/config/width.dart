@@ -26,13 +26,14 @@ class _DoubleWidgetState extends State<DoubleWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: Colors.white,
+        color: Colors.purpleAccent,
         elevation: 10.0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         clipBehavior: Clip.antiAlias,
         semanticContainer: false,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
               padding: EdgeInsets.all(10.0),

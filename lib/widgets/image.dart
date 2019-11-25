@@ -35,10 +35,14 @@ class _ImageDemoState extends State<ImageDemo> {
   @override
   Widget build(BuildContext context) {
     return DetailWidget(
+        onChange: (value) {
+          setState(() {
+            configs = value;
+          });
+        },
         configs: configs,
         child: Image(
-          image:
-              configs["image"] ?? NetworkImage('https://example.com/image.jpg'),
+          image: configs["image"] ?? AssetImage('images/lake.jpg'),
           frameBuilder: configs["frameBuilder"],
           loadingBuilder: configs["loadingBuilder"],
           semanticLabel: configs["semanticLabel"],

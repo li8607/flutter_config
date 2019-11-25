@@ -17,10 +17,9 @@ class _CrossAxisAlignmentWidgetState extends State<CrossAxisAlignmentWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Row(
-      children: <Widget>[
-        Expanded(
-          child: RadioListTile(
+      child: Wrap(
+        children: <Widget>[
+          RadioListTile(
             value: CrossAxisAlignment.baseline,
             title: Text("baseline"),
             groupValue: _groupValue,
@@ -29,9 +28,7 @@ class _CrossAxisAlignmentWidgetState extends State<CrossAxisAlignmentWidget> {
               widget.onChange(_groupValue);
             },
           ),
-        ),
-        Expanded(
-          child: RadioListTile(
+          RadioListTile(
             value: CrossAxisAlignment.center,
             title: Text("center"),
             groupValue: _groupValue,
@@ -40,9 +37,7 @@ class _CrossAxisAlignmentWidgetState extends State<CrossAxisAlignmentWidget> {
               widget.onChange(_groupValue);
             },
           ),
-        ),
-        Expanded(
-          child: RadioListTile(
+          RadioListTile(
             value: CrossAxisAlignment.end,
             title: Text("end"),
             groupValue: _groupValue,
@@ -51,9 +46,7 @@ class _CrossAxisAlignmentWidgetState extends State<CrossAxisAlignmentWidget> {
               widget.onChange(_groupValue);
             },
           ),
-        ),
-        Expanded(
-          child: RadioListTile(
+          RadioListTile(
             value: CrossAxisAlignment.start,
             title: Text("start"),
             groupValue: _groupValue,
@@ -62,9 +55,7 @@ class _CrossAxisAlignmentWidgetState extends State<CrossAxisAlignmentWidget> {
               widget.onChange(_groupValue);
             },
           ),
-        ),
-        Expanded(
-          child: RadioListTile(
+          RadioListTile(
             value: CrossAxisAlignment.stretch,
             title: Text("stretch"),
             groupValue: _groupValue,
@@ -73,8 +64,8 @@ class _CrossAxisAlignmentWidgetState extends State<CrossAxisAlignmentWidget> {
               widget.onChange(_groupValue);
             },
           ),
-        ),
-      ],
-    ));
+        ],
+      ),
+    );
   }
 }

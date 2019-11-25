@@ -7,11 +7,17 @@ import 'package:flutter_widget/config/color.dart';
 import 'package:flutter_widget/config/constraints.dart';
 import 'package:flutter_widget/config/cross_axis_alignment.dart';
 import 'package:flutter_widget/config/decoration.dart';
+import 'package:flutter_widget/config/image_frame_builder.dart';
 import 'package:flutter_widget/config/text_baseline.dart';
+import 'package:flutter_widget/config/text_direction.dart';
 import 'package:flutter_widget/config/width.dart';
 
 import 'edgeInsets.dart';
+import 'image_provider.dart';
+import 'main_axis_alignment.dart';
+import 'main_axis_size.dart';
 import 'matrix4.dart';
+import 'vertical_direction.dart';
 
 class ConfigGroupWidget extends StatefulWidget {
   final ValueChanged<Map<String, Object>> onChange;
@@ -60,14 +66,86 @@ class _ConfigGroupWidgetState extends State<ConfigGroupWidget>
     } else if (key == 'textBaseline') {
       child = _createTextBaseline(key, value);
     } else if (key == 'crossAxisAlignment') {
-      child = _createcrossAxisAlignment(key, value);
+      child = _createCrossAxisAlignment(key, value);
+    } else if (key == 'mainAxisAlignment') {
+      child = _createMainAxisAlignment(key, value);
+    } else if (key == 'mainAxisSize') {
+      child = _createMainAxisSize(key, value);
+    } else if (key == 'textDirection') {
+      child = _createTextDirection(key, value);
+    } else if (key == 'verticalDirection') {
+      child = _createVerticalDirection(key, value);
+    } else if (key == 'image') {
+      child = _createImageProvider(key, value);
+    } else if (key == 'frameBuilder') {
+      child = _createImageFrameBuilder(key, value);
     } else {
       child = Container();
     }
     return child;
   }
 
-  Widget _createcrossAxisAlignment(key, value) {
+  Widget _createImageFrameBuilder(key, value) {
+    return ImageFrameBuilderWidget(
+      imageFrameBuilder: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createImageProvider(key, value) {
+    return ImageProviderWidget(
+      imageProvider: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createVerticalDirection(key, value) {
+    return VerticalDirectionWidget(
+      verticalDirection: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createTextDirection(key, value) {
+    return TextDirectionWidget(
+      textDirection: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createMainAxisSize(key, value) {
+    return MainAxisSizeWidget(
+      mainAxisSize: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createMainAxisAlignment(key, value) {
+    return MainAxisAlignmentWidget(
+      mainAxisAlignment: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createCrossAxisAlignment(key, value) {
     return CrossAxisAlignmentWidget(
       crossAxisAlignment: value,
       onChange: (value) {

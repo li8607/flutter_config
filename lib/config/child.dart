@@ -18,7 +18,8 @@ class _ChildWidgetState extends State<ChildWidget> {
           width: width,
           height: height,
           color: color,
-          child: Text('child', style: TextStyle(color: Colors.white)),
+          child: Text('child' * (width ~/ 10),
+              style: TextStyle(color: Colors.white)),
         )
       ],
     );

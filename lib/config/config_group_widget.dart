@@ -8,12 +8,20 @@ import 'package:flutter_widget/config/constraints.dart';
 import 'package:flutter_widget/config/cross_axis_alignment.dart';
 import 'package:flutter_widget/config/decoration.dart';
 import 'package:flutter_widget/config/image_frame_builder.dart';
+import 'package:flutter_widget/config/rect.dart';
+import 'package:flutter_widget/config/string.dart';
 import 'package:flutter_widget/config/text_baseline.dart';
 import 'package:flutter_widget/config/text_direction.dart';
 import 'package:flutter_widget/config/width.dart';
 
+import 'blend_mode.dart';
+import 'bool.dart';
+import 'box_fit.dart';
 import 'edgeInsets.dart';
+import 'filter_quality.dart';
+import 'image_loading_builder.dart';
 import 'image_provider.dart';
+import 'image_repeat.dart';
 import 'main_axis_alignment.dart';
 import 'main_axis_size.dart';
 import 'matrix4.dart';
@@ -79,10 +87,108 @@ class _ConfigGroupWidgetState extends State<ConfigGroupWidget>
       child = _createImageProvider(key, value);
     } else if (key == 'frameBuilder') {
       child = _createImageFrameBuilder(key, value);
+    } else if (key == 'loadingBuilder') {
+      child = _createImageLoadingBuilder(key, value);
+    } else if (key == 'semanticLabel') {
+      child = _createString(key, value);
+    } else if (key == 'excludeFromSemantics' ||
+        key == 'matchTextDirection' ||
+        key == 'gaplessPlayback') {
+      child = _createBoolean(key, value);
+    } else if (key == 'colorBlendMode') {
+      child = _createBlendMode(key, value);
+    } else if (key == 'fit') {
+      child = _createBoxFit(key, value);
+    } else if (key == 'repeat') {
+      child = _createImageRepeat(key, value);
+    } else if (key == 'centerSlice') {
+      child = _createRect(key, value);
+    } else if (key == 'filterQuality') {
+      child = _createFilterQuality(key, value);
     } else {
       child = Container();
     }
     return child;
+  }
+
+  Widget _createFilterQuality(key, value) {
+    return FilterQualityWidget(
+      filterQuality: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createRect(key, value) {
+    return RectWidget(
+      rect: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createImageRepeat(key, value) {
+    return ImageRepeatWidget(
+      imageRepeat: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createBoxFit(key, value) {
+    return BoxFitWidget(
+      boxFit: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createBlendMode(key, value) {
+    return BlendModeWidget(
+      blendMode: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createBoolean(key, value) {
+    return BoolWidget(
+      value: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createString(key, value) {
+    return StringWidget(
+      semanticLabel: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createImageLoadingBuilder(key, value) {
+    return ImageLoadingBuilderWidget(
+      loadingBuilder: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
   }
 
   Widget _createImageFrameBuilder(key, value) {

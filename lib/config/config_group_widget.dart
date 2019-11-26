@@ -25,6 +25,8 @@ import 'image_repeat.dart';
 import 'main_axis_alignment.dart';
 import 'main_axis_size.dart';
 import 'matrix4.dart';
+import 'strut_style.dart';
+import 'text_style.dart';
 import 'vertical_direction.dart';
 
 class ConfigGroupWidget extends StatefulWidget {
@@ -89,7 +91,7 @@ class _ConfigGroupWidgetState extends State<ConfigGroupWidget>
       child = _createImageFrameBuilder(key, value);
     } else if (key == 'loadingBuilder') {
       child = _createImageLoadingBuilder(key, value);
-    } else if (key == 'semanticLabel') {
+    } else if (key == 'semanticLabel' || key == 'data') {
       child = _createString(key, value);
     } else if (key == 'excludeFromSemantics' ||
         key == 'matchTextDirection' ||
@@ -105,10 +107,34 @@ class _ConfigGroupWidgetState extends State<ConfigGroupWidget>
       child = _createRect(key, value);
     } else if (key == 'filterQuality') {
       child = _createFilterQuality(key, value);
+    } else if (key == 'style') {
+      child = _createTextStyle(key, value);
+    } else if (key == 'strutStyle') {
+      child = _createStrutStyle(key, value);
     } else {
       child = Container();
     }
     return child;
+  }
+
+  Widget _createStrutStyle(key, value) {
+    return StrutStyleWidget(
+      strutStyle: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
+  }
+
+  Widget _createTextStyle(key, value) {
+    return TextStyleWidget(
+      textStyle: value,
+      onChange: (value) {
+        config[key] = value;
+        widget.onChange(config);
+      },
+    );
   }
 
   Widget _createFilterQuality(key, value) {

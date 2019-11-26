@@ -35,29 +35,41 @@ class _ImageDemoState extends State<ImageDemo> {
   @override
   Widget build(BuildContext context) {
     return DetailWidget(
-        onChange: (value) {
-          setState(() {
-            configs = value;
-          });
-        },
-        configs: configs,
-        child: Image(
-          image: configs["image"] ?? AssetImage('images/lake.jpg'),
-          frameBuilder: configs["frameBuilder"],
-          loadingBuilder: configs["loadingBuilder"],
-          semanticLabel: configs["semanticLabel"],
-          excludeFromSemantics: configs["excludeFromSemantics"] ?? false,
-          width: configs["width"],
-          height: configs["height"],
-          color: configs["color"],
-          colorBlendMode: configs["colorBlendMode"],
-          fit: configs["fit"],
-          alignment: configs["alignment"] ?? Alignment.center,
-          repeat: configs["repeat"] ?? ImageRepeat.noRepeat,
-          centerSlice: configs["centerSlice"],
-          matchTextDirection: configs["matchTextDirection"] ?? false,
-          gaplessPlayback: configs["gaplessPlayback"] ?? false,
-          filterQuality: configs["filterQuality"] ?? FilterQuality.low,
-        ));
+      onChange: (value) {
+        setState(() {
+          configs = value;
+        });
+      },
+      configs: configs,
+      child: Container(
+          color: Color.fromARGB(33, 33, 33, 33),
+          constraints: BoxConstraints(
+              maxHeight: 1000.0,
+              maxWidth: 1000.0,
+              minHeight: 1000,
+              minWidth: 1000.0),
+          child: Stack(
+            children: <Widget>[
+              Image(
+                image: configs["image"] ?? AssetImage('images/lake.jpg'),
+                frameBuilder: configs["frameBuilder"],
+                loadingBuilder: configs["loadingBuilder"],
+                semanticLabel: configs["semanticLabel"],
+                excludeFromSemantics: configs["excludeFromSemantics"] ?? false,
+                width: configs["width"],
+                height: configs["height"],
+                color: configs["color"],
+                colorBlendMode: configs["colorBlendMode"],
+                fit: configs["fit"],
+                alignment: configs["alignment"] ?? Alignment.center,
+                repeat: configs["repeat"] ?? ImageRepeat.noRepeat,
+                centerSlice: configs["centerSlice"],
+                matchTextDirection: configs["matchTextDirection"] ?? false,
+                gaplessPlayback: configs["gaplessPlayback"] ?? false,
+                filterQuality: configs["filterQuality"] ?? FilterQuality.low,
+              )
+            ],
+          )),
+    );
   }
 }
